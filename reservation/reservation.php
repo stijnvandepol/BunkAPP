@@ -16,36 +16,36 @@ if(!isset($_SESSION['id'])) {
     <meta charset="UTF-8">
     <title>Reservation</title>
     <link rel="icon" href="styles/icon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/reservation.css">
 </head>
 <body>
-    <div class="dashboard-container">
+    <div>
         <header>
             <h1>Reservation</h1>
-            <div class="header-buttons">
+            <div>
                 <a href="logout.php"><button id="btn">Logout</button></a>
             </div>
         </header>
         <main>
-            <section class="dashboard-list">
+            <section>
                 <h2>Make Reservation</h2>
-                <ul id="dashboard-list"></ul>
+                <ul></ul>
             </section>
 
-            <section class="dashboard-data">
+            <section>
                 <form id="reservationForm" method="post">
 
-                    <div class="inputbox">
+                    <div>
                         <label for="start_date">Start Date:</label>
                         <input type="date" id="start_date" name="start_date" required><br>
                     </div>
                     
-                    <div class="inputbox">
+                    <div>
                         <label for="end_date">End Date:</label>
                         <input type="date" id="end_date" name="end_date" required><br>
                     </div>
 
-                    <div class="inputbox">
+                    <div>
                         <label for="room_type">Room Type:</label>
                         <select id="room_type" name="room_type" required>
                             <option value="basic">Basic</option>
@@ -53,17 +53,17 @@ if(!isset($_SESSION['id'])) {
                         </select><br>
                     </div>
 
-                    <div class="inputbox">
+                    <div>
                         <label for="num_people">Number of People:</label>
                         <input type="number" id="num_people" name="num_people" min="1" max="8" required><br>
                     </div>
 
-                    <div class="inputbox">
+                    <div>
                         <label for="room_type">License plate:</label>
                         <input type="text" id="license_platee" name="license_plate"><br>
                     </div>
 
-                    <div class="inputbox">
+                    <div>
                         <label for="special_requests">Special Requests:</label>
                         <input id="special_requests" name="special_requests"><br>
                     </div>
