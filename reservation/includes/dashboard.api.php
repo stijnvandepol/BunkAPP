@@ -23,7 +23,7 @@ function GetData()
                 $response[$i]['num_people'] = $row['num_people'];
                 $response[$i]['status'] = $row['status'];
                 $response[$i]['vehicle_license_plate'] = $row['vehicle_license_plate'];
-                $response[$i]['special_request'] = $row['special_request'] ?? null; 
+                $response[$i]['special_requests'] = $row['special_requests'] ?? null; 
                 
                 $i++;
             }
@@ -33,6 +33,22 @@ function GetData()
         }
     } else {
         echo "Database connection failed";
+    }
+}
+
+
+
+function removeData($conn, $reservation_id)
+{
+    include("dbconnection.php");
+
+    $query = "DELETE FROM reservations WHERE reservation_id = '$reservation_id'";
+    mysqli_query($conn, $query);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['reservation_id']) && isset($_GET['action']) && $_GET['action'] == 'remove') {
+        removeData($conn, $_POST['reservation_id']);
     }
 }
 

@@ -23,27 +23,27 @@ $base_url = 'http://' . $_SERVER['HTTP_HOST'];
                 <div class="btn-group">
                     <button class="btn">
                         <img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/d1c98974-c62d-4071-8bd2-ab859fc5f4e9" alt="" />
-                        <span>Sign in with Google</span>
+                        <span>Sign up with Google</span>
                     </button>
                     <button class="btn">
                         <img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/59c1561b-8152-4d05-b617-0680a7629a0e" alt="" />
-                        <span>Sign in with Apple</span>
+                        <span>Sign up with Apple</span>
                     </button>
                 </div>
 
                 <div class="or">OR</div>
 
                 <label for="name">Name</label>
-                <input type="text" id="name" placeholder="Enter name" name="name" required />
+                <input type="text" id="name" placeholder="Enter name" name="name" required/>
 
                 <label for="email">Email</label>
-                <input type="text" id="email" placeholder="Enter Email" name="email" required />
+                <input type="email" id="email" placeholder="Enter Email" name="email" required/>
 
                 <label for="name">Phone number</label>
-                <input type="text" id="phone_number" placeholder="Enter Phone number" name="phone_number" required />
+                <input type="text" id="phone_number" placeholder="Enter Phone number" name="phone_number" required/>
 
                 <label for="password">Password</label>
-                <input type="password" id= "password" placeholder="Enter Password" name="password" required />
+                <input type="password" id= "password" placeholder="Enter Password" name="password" required/>
 
                 <button type="submit" name="submit" class="login-btn">Register</button>
 

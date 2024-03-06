@@ -27,6 +27,7 @@ if(!isset($_SESSION['id'])) {
         <div class="left-side"></div>
 
         <div class="right-side">
+            <h2>Reservation</h2><br>
             <form id="reservationForm" method="post">
 
                 <div>
@@ -62,7 +63,11 @@ if(!isset($_SESSION['id'])) {
                     <input id="special_requests" name="special_requests"><br>
                 </div>
 
-                <button type="submit">Submit Reservation</button>
+                <button type="submit" name="submit" class="login-btn">Submit Reservation</button>
+                <div class="links">
+                    <a href="#">Forgot password?</a>
+                    <a href="logout.php">Logout</a>
+                </div>
             </form>
         </div>
 

@@ -62,7 +62,7 @@ if (isset($_SESSION['id'])) {
                 <div class="or">OR</div>
 
                 <label for="email">Email</label>
-                <input type="text" placeholder="Enter Email" name="email" required />
+                <input type="email" placeholder="Enter Email" name="email" required/>
 
                 <label for="password">Password</label>
                 <input
