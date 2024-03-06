@@ -12,69 +12,61 @@ if(!isset($_SESSION['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Reservation</title>
     <link rel="icon" href="styles/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/reservation.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
-    <div>
-        <header>
-            <h1>Reservation</h1>
-            <div>
-                <a href="logout.php"><button id="btn">Logout</button></a>
-            </div>
-        </header>
-        <main>
-            <section>
-                <h2>Make Reservation</h2>
-                <ul></ul>
-            </section>
+<main>
+        <div class="left-side"></div>
 
-            <section>
-                <form id="reservationForm" method="post">
+        <div class="right-side">
+            <form id="reservationForm" method="post">
 
-                    <div>
-                        <label for="start_date">Start Date:</label>
-                        <input type="date" id="start_date" name="start_date" required><br>
-                    </div>
-                    
-                    <div>
-                        <label for="end_date">End Date:</label>
-                        <input type="date" id="end_date" name="end_date" required><br>
-                    </div>
+                <div>
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" required><br>
+                </div>
+                
+                <div>
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date" required><br>
+                </div>
 
-                    <div>
-                        <label for="room_type">Room Type:</label>
-                        <select id="room_type" name="room_type" required>
-                            <option value="basic">Basic</option>
-                            <option value="luxury">Luxury</option>
-                        </select><br>
-                    </div>
+                <div>
+                    <label for="room_type">Room Type:</label>
+                    <select id="room_type" name="room_type" required>
+                        <option value="basic">Basic</option>
+                        <option value="luxury">Luxury</option>
+                    </select><br>
+                </div>
 
-                    <div>
-                        <label for="num_people">Number of People:</label>
-                        <input type="number" id="num_people" name="num_people" min="1" max="8" required><br>
-                    </div>
+                <div>
+                    <label for="num_people">Number of People:</label>
+                    <input type="number" id="num_people" name="num_people" min="1" max="8" required><br>
+                </div>
 
-                    <div>
-                        <label for="room_type">License plate:</label>
-                        <input type="text" id="license_platee" name="license_plate"><br>
-                    </div>
+                <div>
+                    <label for="license_plate">License plate:</label>
+                    <input type="text" id="license_plate" name="license_plate"><br>
+                </div>
 
-                    <div>
-                        <label for="special_requests">Special Requests:</label>
-                        <input id="special_requests" name="special_requests"><br>
-                    </div>
+                <div>
+                    <label for="special_requests">Special Requests:</label>
+                    <input id="special_requests" name="special_requests"><br>
+                </div>
 
+                <button type="submit">Submit Reservation</button>
+            </form>
+        </div>
 
-                    
-                    <button type="submit">Submit Reservation</button>
-                </form>
-            </section>
-        </main>
-    </div>
+    </main>
 
     <script>
         document.getElementById("reservationForm").addEventListener("submit", async function(event) {
