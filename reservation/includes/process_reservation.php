@@ -22,14 +22,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response['success'] = false;
             $response['message'] = 'This reservation already exists';
         } else {
+            // Start transaction to ensure data consistency
+            mysqli_begin_transaction($conn);
+
             // Insert the reservation if it doesn't exist
             $sql = "INSERT INTO reservations (customers_id, reservation_date, start_date, end_date, room_type, num_people, special_requests, vehicle_license_plate) VALUES ('$customers_id', '$reservation_date', '$start_date', '$end_date', '$room_type', '$num_people', '$special_requests', '$license_plate')";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {
-                $response['success'] = true;
-                $response['message'] = 'Reservation successful!';
+                // Get the ID of the newly inserted reservation
+                $reservation_id = mysqli_insert_id($conn);
+
+                // Insert a record into the plates table with the reservation_id
+                $insertPlateSql = "INSERT INTO plates (customer_id, reservation_id, plate, active) VALUES ('$customers_id', '$reservation_id', '$license_plate', true)";
+                $plateResult = mysqli_query($conn, $insertPlateSql);
+                
+                if ($plateResult) {
+                    // Commit the transaction if both inserts are successful
+                    mysqli_commit($conn);
+                    $response['success'] = true;
+                    $response['message'] = 'Reservation and plate record added successfully';
+                } else {
+                    // Rollback the transaction if plate insertion fails
+                    mysqli_rollback($conn);
+                    $response['success'] = false;
+                    $response['message'] = 'Failed to add plate record: ' . mysqli_error($conn);
+                }
             } else {
+                // Rollback the transaction if reservation insertion fails
+                mysqli_rollback($conn);
                 $response['success'] = false;
                 $response['message'] = 'Reservation failed. ' . mysqli_error($conn);
             }
