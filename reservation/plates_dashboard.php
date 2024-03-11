@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,33 +19,29 @@
             </div>
         </header>
         <main>
-            <section class="reservation-dashboard">
-                <h2>Plates dashboard</h2>
-                <?php
-                include("includes/plates_dashboard.api.php");
-
-                $data = json_decode(GetData(), true);
-
-                if ($data === NULL) {
-                    echo 'Er is een fout opgetreden bij het decoderen van de JSON-gegevens.';
-                } else {
-                    if (empty($data)) {
-                        echo 'Geen gegevens beschikbaar.';
+        <section class="reservation-dashboard">
+            <h2>Plates dashboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer id</th>
+                        <th>Name</th>
+                        <th>Reservation id</th>
+                        <th>Plate id</th>
+                        <th>License plate</th>
+                        <th>Active</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    include("includes/plates_dashboard.api.php");
+                    $data = json_decode(GetData(), true);
+                    if ($data === NULL) {
+                        echo '<tr><td colspan="7">Er is een fout opgetreden bij het decoderen van de JSON-gegevens.</td></tr>';
+                    } elseif (empty($data)) {
+                        echo '<tr><td colspan="7">Geen gegevens beschikbaar.</td></tr>';
                     } else {
-                        echo '<table>';
-                        echo '<thead>';
-                        echo '<tr>';
-                        echo '<th>Customer id</th>';
-                        echo '<th>Name</th>';
-                        echo '<th>Reservation id</th>';
-                        echo '<th>Plate id</th>';
-                        echo '<th>License plate</th>';
-                        echo '<th>Active</th>';
-                        echo '<th></th>';
-                        echo '</tr>';
-                        echo '</thead>';
-                        echo '<tbody>';
-
                         foreach ($data as $entry) {
                             echo '<tr>';
                             echo '<td>' . $entry['customer_id'] . '</td>';
@@ -56,13 +53,12 @@
                             echo '<td><button class="logout-button id="btn" onclick="removePlate(event, ' . $entry['plate_id'] . ')">Delete</button></td>';
                             echo '</tr>';
                         }
-
-                        echo '</tbody>';
-                        echo '</table>';
                     }
-                }
-                ?>
-            </section>
+                    ?>
+                </tbody>
+            </table>
+        </section>
+
 
             <form id="chartForm" action="includes/plates_dashboard.api.php?action=remove" method="post">
                 <input type="hidden" name="plate_id" id="plateIdInput">

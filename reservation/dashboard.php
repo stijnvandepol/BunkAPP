@@ -19,37 +19,34 @@
             </div>
         </header>
         <main>
-            <section class="reservation-dashboard">
-                <h2>Reservation dashboard</h2>
-                <?php
-                include("includes/dashboard.api.php");
+        <section class="reservation-dashboard">
+            <h2>Reservation dashboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Type</th>
+                        <th>People</th>
+                        <th>Special</th>
+                        <th>Status</th>
+                        <th>License plate</th>
+                        <th>Remove</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    include("includes/dashboard.api.php");
+                    $data = json_decode(GetData(), true);
 
-                $data = json_decode(GetData(), true);
-
-                if ($data === NULL) {
-                    echo 'Er is een fout opgetreden bij het decoderen van de JSON-gegevens.';
-                } else {
-                    if (empty($data)) {
-                        echo 'Geen gegevens beschikbaar.';
+                    if ($data === NULL) {
+                        echo '<tr><td colspan="11">Er is een fout opgetreden bij het decoderen van de JSON-gegevens.</td></tr>';
+                    } elseif (empty($data)) {
+                        echo '<tr><td colspan="11">Geen gegevens beschikbaar.</td></tr>';
                     } else {
-                        echo '<table>';
-                        echo '<thead>';
-                        echo '<tr>';
-                        echo '<th>Id</th>';
-                        echo '<th>Name</th>';
-                        echo '<th>Start date</th>';
-                        echo '<th>End date</th>';
-                        echo '<th>Type</th>';
-                        echo '<th>People</th>';
-                        echo '<th>Special</th>';
-                        echo '<th>Status</th>';
-                        echo '<th>License plate</th>';
-                        echo '<th>Remove</th>';
-                        echo '<th></th>';
-                        echo '</tr>';
-                        echo '</thead>';
-                        echo '<tbody>';
-
                         foreach ($data as $entry) {
                             echo '<tr>';
                             echo '<td>' . $entry['reservation_id'] . '</td>';
@@ -61,16 +58,15 @@
                             echo '<td>' . $entry['special_requests'] . '</td>'; 
                             echo '<td>' . $entry['status'] . '</td>';
                             echo '<td>' . $entry['vehicle_license_plate'] . '</td>';
-                            echo '<td><button class="logout-button id="btn" onclick="removeData(event, ' . $entry['reservation_id'] . ')">Delete</button></td>';
+                            echo '<td><button class="logout-button" id="btn" onclick="removeData(event, ' . $entry['reservation_id'] . ')">Delete</button></td>';
                             echo '</tr>';
                         }
-
-                        echo '</tbody>';
-                        echo '</table>';
                     }
-                }
-                ?>
-            </section>
+                    ?>
+                </tbody>
+            </table>
+        </section>
+
 
             <form id="chartForm" action="includes/dashboard.api.php?action=remove" method="post">
                 <input type="hidden" name="reservation_id" id="reservationIdInput">

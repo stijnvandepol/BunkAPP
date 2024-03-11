@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $reservation_id = mysqli_insert_id($conn);
 
                 // Insert a record into the plates table with the reservation_id
-                $insertPlateSql = "INSERT INTO plates (customer_id, reservation_id, plate, active) VALUES ('$customers_id', '$reservation_id', '$license_plate', true)";
+                $insertPlateSql = "INSERT INTO plates (customer_id, reservation_id, plate, active) VALUES ('$customers_id', '$reservation_id', '$license_plate', false)";
                 $plateResult = mysqli_query($conn, $insertPlateSql);
                 
                 if ($plateResult) {
