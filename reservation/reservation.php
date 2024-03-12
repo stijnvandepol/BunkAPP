@@ -65,7 +65,6 @@ if(!isset($_SESSION['id'])) {
 
                 <button type="submit" name="submit" class="login-btn">Submit Reservation</button>
                 <div class="links">
-                    <a href="#">Forgot password?</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </form>

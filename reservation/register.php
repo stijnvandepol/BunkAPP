@@ -48,7 +48,7 @@ $base_url = 'http://' . $_SERVER['HTTP_HOST'];
                 <button type="submit" name="submit" class="login-btn">Register</button>
 
                 <div class="links">
-                    <a href="index.html">Back</a>
+                    <a href="https://145.220.74.133/">Back to homepage</a>
                     <p><a href="login.php">Already have an account?</a></p>
                 </div>
             </form>

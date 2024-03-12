@@ -73,7 +73,7 @@ if (isset($_SESSION['id'])) {
 
                 <button type="submit" value="Login" name="submit" class="login-btn">Log In</button>
                 <div class="links">
-                    <a href="#">Forgot password?</a>
+                    <a href="https://145.220.74.133/">Back to homepage</a>
                     <a href="register.php">Do not have an account?</a>
                 </div>
             </form>
