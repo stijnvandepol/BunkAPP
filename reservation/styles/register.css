@@ -42,7 +42,7 @@ main {
 .left-side {
   height: 100%;
   width: 100%;
-  background-image: url(http://localhost/reservation/styles/fontys.jpg);
+  background-image: url(http://localhost/reservation/styles/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
