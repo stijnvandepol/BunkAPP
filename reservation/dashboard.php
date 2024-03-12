@@ -28,6 +28,7 @@
                         <th>Name</th>
                         <th>Start date</th>
                         <th>End date</th>
+                        <th>Location</th>
                         <th>Type</th>
                         <th>People</th>
                         <th>Special</th>
@@ -53,6 +54,7 @@
                             echo '<td>' . $entry['name'] . '</td>';
                             echo '<td>' . $entry['start_date'] . '</td>';
                             echo '<td>' . $entry['end_date'] . '</td>';
+                            echo '<td>' . $entry['location'] . '</td>';
                             echo '<td>' . $entry['room_type'] . '</td>';
                             echo '<td>' . $entry['num_people'] . '</td>';
                             echo '<td>' . $entry['special_requests'] . '</td>'; 

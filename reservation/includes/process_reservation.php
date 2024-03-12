@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $reservation_date = date('Y-m-d');
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $park_location = $_POST['park_location'];
     $room_type = $_POST['room_type'];
     $num_people = $_POST['num_people'];
     $special_requests = $_POST['special_requests'];
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mysqli_begin_transaction($conn);
 
             // Insert the reservation if it doesn't exist
-            $sql = "INSERT INTO reservations (customers_id, reservation_date, start_date, end_date, room_type, num_people, special_requests, vehicle_license_plate) VALUES ('$customers_id', '$reservation_date', '$start_date', '$end_date', '$room_type', '$num_people', '$special_requests', '$license_plate')";
+            $sql = "INSERT INTO reservations (customers_id, reservation_date, start_date, end_date, park_location, room_type, num_people, special_requests, vehicle_license_plate) VALUES ('$customers_id', '$reservation_date', '$start_date', '$end_date', '$park_location', '$room_type', '$num_people', '$special_requests', '$license_plate')";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {

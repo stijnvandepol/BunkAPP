@@ -19,6 +19,7 @@ function GetData()
                 $response[$i]['reservation_date'] = $row['reservation_date'];
                 $response[$i]['start_date'] = $row['start_date'];
                 $response[$i]['end_date'] = $row['end_date'];
+                $response[$i]['location'] = $row['location'];
                 $response[$i]['room_type'] = $row['room_type'];
                 $response[$i]['num_people'] = $row['num_people'];
                 $response[$i]['status'] = $row['status'];
