@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $response = array();
 
-    $checkQuery = "SELECT * FROM reservations WHERE start_date = '$start_date' AND end_date = '$end_date' AND room_type = '$room_type'";
+    $checkQuery = "SELECT * FROM reservations WHERE start_date = '$start_date' AND end_date = '$end_date' AND room_type = '$room_type' AND customers_id = '$customers_id'";
     $checkResult = mysqli_query($conn, $checkQuery);
 
     if ($checkResult) {
