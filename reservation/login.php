@@ -1,27 +1,12 @@
 <?php
-$base_url = 'http://' . $_SERVER['HTTP_HOST'];
+$base_url = 'https://' . $_SERVER['HTTP_HOST'];
 
 ini_set('session.cookie_path', '/reservation');
 session_start();
 
 $api_url = $base_url . '/reservation/includes/login.api.php';
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $api_url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // Skip SSL certificate verification
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); // Skip SSL certificate verification
-
-$api_data_json = curl_exec($ch);
-
-if (curl_errno($ch)) {
-    echo 'Error:' . curl_error($ch);
-}
-
-curl_close($ch);
-
-$response = json_decode($api_data_json, true);
+// $response = json_decode($api_data_json, true);
 
 if (isset($_SESSION['id'])) {
     header("Location: " . $base_url . "/reservation/reservation.php");
@@ -72,10 +57,18 @@ if (isset($_SESSION['id'])) {
                     required />
 
                 <button type="submit" value="Login" name="submit" class="login-btn">Log In</button>
+                <div>
+                        <?php
+                        if (isset($_GET['login_error']) && $_GET['login_error'] == 1) {
+                            echo '<p style="color: red;">Invalid login credentials.<br> Please try again.</p>';
+                        }
+                        ?>
+                </div><br>
                 <div class="links">
                     <a href="https://fonteyn-vakantieparken.nl">Back to homepage</a>
                     <a href="register.php">Do not have an account?</a>
                 </div>
+
             </form>
         </div>
 

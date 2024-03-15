@@ -1,7 +1,5 @@
 <?php
-$base_url = 'http://' . $_SERVER['HTTP_HOST'];
-
-ini_set('session.cookie_path', '/reservation');
+$base_url = 'https://' . $_SERVER['HTTP_HOST'];
 
 session_start();
 if(!isset($_SESSION['id'])) {
@@ -31,26 +29,26 @@ if(!isset($_SESSION['id'])) {
             <form id="reservationForm" method="post">
 
                 <div>
-                    <label for="start_date">Start Date:</label>
+                    <label for="start_date">Start Date</label>
                     <input type="date" id="start_date" name="start_date" required><br>
                 </div>
                 
                 <div>
-                    <label for="end_date">End Date:</label>
+                    <label for="end_date">End Date</label>
                     <input type="date" id="end_date" name="end_date" required><br>
                 </div>
 
                 <div>
                     <label for="park_location">Vakantiepark</label>
                     <select id="park_location" name="park_location" required>
-                        <option value="nederland">Nederland</option>
-                        <option value="belgie">België</option>
-                        <option value="duitsland">Duitlsand</option>
+                        <option value="Nederland">Nederland</option>
+                        <option value="Belgie">België</option>
+                        <option value="Duitsland">Duitlsand</option>
                     </select><br><br>
                 </div>
 
                 <div>
-                    <label for="room_type">Room Type:</label>
+                    <label for="room_type">Room Type</label>
                     <select id="room_type" name="room_type" required>
                         <option value="basic">Basic</option>
                         <option value="luxury">Luxury</option>
@@ -58,17 +56,17 @@ if(!isset($_SESSION['id'])) {
                 </div>
 
                 <div>
-                    <label for="num_people">Number of People:</label>
+                    <label for="num_people">Number of People</label>
                     <input type="number" id="num_people" name="num_people" min="1" max="8" required><br>
                 </div>
 
                 <div>
-                    <label for="license_plate">License plate:</label>
+                    <label for="license_plate">License plate</label>
                     <input type="text" id="license_plate" name="license_plate"><br>
                 </div>
 
                 <div>
-                    <label for="special_requests">Special Requests:</label>
+                    <label for="special_requests">Special Requests</label>
                     <input id="special_requests" name="special_requests"><br>
                 </div>
 
@@ -107,6 +105,7 @@ if(!isset($_SESSION['id'])) {
             const result = await response.json();
             if (result.success) {
                 alert("Reservation submitted successfully!");
+                window.location.href = "succes.html";
             } else {
                 alert("Failed to submit reservation: " + result.message);
             }

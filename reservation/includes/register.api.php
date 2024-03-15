@@ -20,15 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response['message'] = 'This email is already in use';
         } else {
             // Insert the user if the email doesn't exist
-            $sql = "INSERT INTO customers (name, email, phone_number, password) VALUES ('$name', '$email', '$phone_number', '$hashedPassword')";
-            $result = mysqli_query($conn, $sql);
-
-            if ($result) {
+            $stmt = $conn->prepare("INSERT INTO customers (name, email, phone_number, password) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $name, $email, $phone_number, $hashedPassword);
+            
+            if ($stmt->execute()) {
                 $response['success'] = true;
                 $response['message'] = 'Registration successful!';
             } else {
                 $response['success'] = false;
-                $response['message'] = 'Registration failed. ' . mysqli_error($conn);
+                $response['message'] = 'Registration failed. ' . $stmt->error;
             }
         }
     } else {

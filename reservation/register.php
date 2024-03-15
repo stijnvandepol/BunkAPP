@@ -1,5 +1,5 @@
 <?php
-$base_url = 'http://' . $_SERVER['HTTP_HOST'];
+$base_url = 'https://' . $_SERVER['HTTP_HOST'];
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ $base_url = 'http://' . $_SERVER['HTTP_HOST'];
                 <label for="email">Email</label>
                 <input type="email" id="email" placeholder="Enter Email" name="email" required/>
 
-                <label for="name">Phone number</label>
+                <label for="name">Phone number (06-)</label>
                 <input type="text" id="phone_number" placeholder="Enter Phone number" name="phone_number" required/>
 
                 <label for="password">Password</label>
