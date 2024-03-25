@@ -39,11 +39,11 @@ if(!isset($_SESSION['id'])) {
                 </div>
 
                 <div>
-                    <label for="park_location">Vakantiepark</label>
+                    <label for="park_location">Vacation park</label>
                     <select id="park_location" name="park_location" required>
-                        <option value="Nederland">Nederland</option>
-                        <option value="Belgie">België</option>
-                        <option value="Duitsland">Duitlsand</option>
+                        <option value="Nederland">Netherlands</option>
+                        <option value="Belgie">Belgium</option>
+                        <option value="Duitsland">Germany</option>
                     </select><br><br>
                 </div>
 
