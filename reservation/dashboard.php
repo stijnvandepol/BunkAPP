@@ -1,3 +1,12 @@
+<?php
+$base_url = 'https://' . $_SERVER['HTTP_HOST'];
+
+session_start();
+if(!isset($_SESSION['id'])) {
+    header("Location: " . $base_url . "/reservation/dashboard_login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
