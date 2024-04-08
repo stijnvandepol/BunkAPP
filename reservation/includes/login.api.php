@@ -7,6 +7,15 @@ if (isset($_POST['submit'])) {
     $name = $_POST['email'];
     $password = $_POST['password'];
 
+    // Controleer of zowel naam als wachtwoord zijn ingevoerd
+    if (empty($name) || empty($password)) {
+        $response['success'] = false;
+        $response['message'] = 'Please enter both email and password';
+            
+        header('Location: ' . $base_url . '/reservation/login.php?login_error=1');
+        exit();
+    }
+
     $response = array();
 
     // Haal het opgeslagen gehashte wachtwoord op basis van het e-mailadres
@@ -27,6 +36,7 @@ if (isset($_POST['submit'])) {
                 ini_set('session.cookie_lifetime', 86400);
                 session_start();
                 $_SESSION['id'] = $response['id'];
+
             } else {
                 $response['success'] = false;
                 $response['message'] = 'Invalid name or password';
@@ -34,12 +44,6 @@ if (isset($_POST['submit'])) {
                 header('Location: ' . $base_url . '/reservation/login.php?login_error=1');
                 exit();
             }
-        } else {
-            $response['success'] = false;
-            $response['message'] = 'Invalid username or password';
-
-            header('Location: ' . $base_url . '/reservation/login.php?login_error=1');
-            exit();
         }
     } else {
         $response['success'] = false;
