@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $response['success'] = false;
         $response['message'] = 'Please enter both email and password';
             
-        header('Location: ' . $base_url . '/reservation/dashboard_login.php?login_error=1');
+        header('Location: ' . $base_url . '/reservation/dashboard_login.php');
         exit();
     }
 
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
                 $response['success'] = false;
                 $response['message'] = 'Invalid name or password';
 
-                header('Location: ' . $base_url . '/reservation/dashboard_login.php?login_error=1');
+                header('Location: ' . $base_url . '/reservation/dashboard_login.php');
                 exit();
             }
         }
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
         $response['success'] = false;
         $response['message'] = 'Error executing query';
 
-        header('Location: ' . $base_url . '/reservation/dashboard_login.php?login_error=1');
+        header('Location: ' . $base_url . '/reservation/dashboard_login.php');
         exit();
     }
 
