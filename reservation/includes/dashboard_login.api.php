@@ -4,22 +4,23 @@ include('dbconnection.php');
 $base_url = 'http://' . $_SERVER['HTTP_HOST'];
 
 if (isset($_POST['submit'])) {
-    $name = $_POST['email'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Controleer of zowel naam als wachtwoord zijn ingevoerd
-    if (empty($name) || empty($password)) {
+    // Controleer of zowel email als wachtwoord zijn ingevoerd
+    if (empty($email) || empty($password)) {
         $response['success'] = false;
         $response['message'] = 'Please enter both email and password';
-            
-        header('Location: ' . $base_url . '/reservation/dashboard_login.php');
+
+        // Stuur gebruiker terug naar het loginformulier met een foutmelding
+        header('Location: ' . $base_url . '/reservation/dashboard_login.php?error=' . urlencode($response['message']));
         exit();
     }
 
     $response = array();
 
     // Haal het opgeslagen gehashte wachtwoord op basis van het e-mailadres
-    $getPasswordQuery = "SELECT id, email, password FROM users WHERE email = '$name'";
+    $getPasswordQuery = "SELECT id, email, password FROM users WHERE email = '$email'";
     $getPasswordResult = mysqli_query($conn, $getPasswordQuery);
 
     if ($getPasswordResult) {
@@ -37,28 +38,32 @@ if (isset($_POST['submit'])) {
                 session_start();
                 $_SESSION['id'] = $response['id'];
 
+                // Stuur gebruiker door naar het dashboard
+                header('Location: ' . $response['redirect']);
+                exit();
             } else {
                 $response['success'] = false;
-                $response['message'] = 'Invalid name or password';
+                $response['message'] = 'Invalid email or password';
 
-                header('Location: ' . $base_url . '/reservation/dashboard_login.php');
+                // Stuur gebruiker terug naar het loginformulier met een foutmelding
+                header('Location: ' . $base_url . '/reservation/dashboard_login.php?login_error=2');
                 exit();
             }
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Invalid email or password';
+
+            // Stuur gebruiker terug naar het loginformulier met een foutmelding
+            header('Location: ' . $base_url . '/reservation/dashboard_login.php?login_error=2');
+            exit();
         }
     } else {
         $response['success'] = false;
         $response['message'] = 'Error executing query';
 
-        header('Location: ' . $base_url . '/reservation/dashboard_login.php');
+        // Stuur gebruiker terug naar het loginformulier met een foutmelding
+        header('Location: ' . $base_url . '/reservation/dashboard_login.php?login_error=2');
         exit();
     }
-
-    if ($response['success'] && isset($response['redirect'])) {
-        header('Location: ' . $response['redirect']);
-        exit();
-    }
-
-    header('Content-Type: application/json');
-    echo json_encode($response);
 }
 ?>

@@ -6,12 +6,6 @@ session_start();
 
 $api_url = $base_url . '/reservation/includes/dashboard_login.api.php';
 
-// $response = json_decode($api_data_json, true);
-
-if (isset($_SESSION['id'])) {
-    header("Location: " . $base_url . "/reservation/dashboard.php");
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,13 +37,11 @@ if (isset($_SESSION['id'])) {
                 <input type="password" placeholder="Enter Password" name="password" required />
 
                 <button type="submit" value="Login" name="submit" class="login-btn">Log In</button>
-
-                <?php
-                if (isset($_GET['login_error']) && $_GET['login_error'] == 1) {
-                    echo '<p class="error-message">Invalid login credentials. Please try again.</p>';
-                }
-                ?>
-
+                    <?php
+                    if (isset($_GET['login_error']) && $_GET['login_error'] == 2) {
+                        echo '<p class="error-message">Invalid login credentials. Please try again.</p>';
+                    }
+                    ?>
                 <div class="links">
                     <a href="https://fonteyn-vakantieparken.nl">Back to homepage</a>
                 </div>

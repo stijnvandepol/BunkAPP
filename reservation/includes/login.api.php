@@ -3,6 +3,8 @@ include('dbconnection.php');
 
 $base_url = 'http://' . $_SERVER['HTTP_HOST'];
 
+$response = array(); // Initialisatie van de response-variabele
+
 if (isset($_POST['submit'])) {
     $name = $_POST['email'];
     $password = $_POST['password'];
@@ -15,8 +17,6 @@ if (isset($_POST['submit'])) {
         header('Location: ' . $base_url . '/reservation/login.php?login_error=1');
         exit();
     }
-
-    $response = array();
 
     // Haal het opgeslagen gehashte wachtwoord op basis van het e-mailadres
     $getPasswordQuery = "SELECT id, email, password FROM customers WHERE email = '$name'";
@@ -57,8 +57,5 @@ if (isset($_POST['submit'])) {
         header('Location: ' . $response['redirect']);
         exit();
     }
-
-    header('Content-Type: application/json');
-    echo json_encode($response);
 }
 ?>

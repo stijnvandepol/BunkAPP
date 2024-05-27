@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   `reservation_date` DATE,
   `start_date` DATE,
   `end_date` DATE,
+  `location` VARCHAR(255),
   `room_type` VARCHAR(50),
   `special_requests` VARCHAR(255),
   `status` VARCHAR(20),

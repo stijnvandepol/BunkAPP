@@ -58,11 +58,11 @@ if (isset($_SESSION['id'])) {
 
                 <button type="submit" value="Login" name="submit" class="login-btn">Log In</button>
                 <div>
-                        <?php
-                        if (isset($_GET['login_error']) && $_GET['login_error'] == 1) {
-                            echo '<p style="color: red;">Invalid login credentials.<br> Please try again.</p>';
-                        }
-                        ?>
+                    <?php
+                    if (isset($_GET['login_error']) && $_GET['login_error'] == 1) {
+                        echo '<p style="color: red;">Invalid login credentials.<br> Please try again.</p>';
+                    }
+                    ?>
                 </div><br>
                 <div class="links">
                     <a href="https://fonteyn-vakantieparken.nl">Back to homepage</a>

@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $reservation_date = date('Y-m-d');
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $park_location = $_POST['park_location'];
     $room_type = $_POST['room_type'];
     $num_people = $_POST['num_people'];
     $special_requests = $_POST['special_requests'];
@@ -14,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $response = array();
 
-    $checkQuery = "SELECT * FROM reservations WHERE start_date = '$start_date' AND end_date = '$end_date' AND room_type = '$room_type'";
+    $checkQuery = "SELECT * FROM reservations WHERE start_date = '$start_date' AND end_date = '$end_date' AND room_type = '$room_type' AND customers_id = '$customers_id'";
     $checkResult = mysqli_query($conn, $checkQuery);
 
     if ($checkResult) {
@@ -26,18 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mysqli_begin_transaction($conn);
 
             // Insert the reservation if it doesn't exist
-            $sql = "INSERT INTO reservations (customers_id, reservation_date, start_date, end_date, room_type, num_people, special_requests, vehicle_license_plate) VALUES ('$customers_id', '$reservation_date', '$start_date', '$end_date', '$room_type', '$num_people', '$special_requests', '$license_plate')";
-            $result = mysqli_query($conn, $sql);
+            $stmt = $conn->prepare("INSERT INTO reservations (customers_id, reservation_date, start_date, end_date, location, room_type, num_people, special_requests, vehicle_license_plate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssssss", $customers_id, $reservation_date, $start_date, $end_date, $park_location, $room_type, $num_people, $special_requests, $license_plate);            
 
-            if ($result) {
+            if ($stmt->execute()) {
                 // Get the ID of the newly inserted reservation
-                $reservation_id = mysqli_insert_id($conn);
+                $reservation_id = $stmt->insert_id;
 
                 // Insert a record into the plates table with the reservation_id
-                $insertPlateSql = "INSERT INTO plates (customer_id, reservation_id, plate, active) VALUES ('$customers_id', '$reservation_id', '$license_plate', false)";
-                $plateResult = mysqli_query($conn, $insertPlateSql);
+                $stmt2 = $conn->prepare("INSERT INTO plates (customer_id, reservation_id, plate, active) VALUES (?, ?, ?, false)");
+                $stmt2->bind_param("sss", $customers_id, $reservation_id, $license_plate);
                 
-                if ($plateResult) {
+                if ($stmt2->execute()) {
                     // Commit the transaction if both inserts are successful
                     mysqli_commit($conn);
                     $response['success'] = true;
@@ -46,13 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Rollback the transaction if plate insertion fails
                     mysqli_rollback($conn);
                     $response['success'] = false;
-                    $response['message'] = 'Failed to add plate record: ' . mysqli_error($conn);
+                    $response['message'] = 'Failed to add plate record: ' . $stmt2->error;
                 }
             } else {
                 // Rollback the transaction if reservation insertion fails
                 mysqli_rollback($conn);
                 $response['success'] = false;
-                $response['message'] = 'Reservation failed. ' . mysqli_error($conn);
+                $response['message'] = 'Reservation failed. ' . $stmt->error;
             }
         }
     } else {
