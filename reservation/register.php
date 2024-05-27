@@ -1,5 +1,5 @@
 <?php
-$base_url = 'https://' . $_SERVER['HTTP_HOST'];
+$base_url = 'http://' . $_SERVER['HTTP_HOST'];
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +81,7 @@ $base_url = 'https://' . $_SERVER['HTTP_HOST'];
                 }
             } catch (error) {
                 console.error('Error during registration:', error);
-                alert('An error occurred during registration.');
+                alert('An error occurred during registration: ' + error.message);
             }
         }
     </script>

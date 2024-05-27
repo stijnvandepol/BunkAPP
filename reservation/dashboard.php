@@ -1,5 +1,5 @@
 <?php
-$base_url = 'https://' . $_SERVER['HTTP_HOST'];
+$base_url = 'http://' . $_SERVER['HTTP_HOST'];
 
 session_start();
 if(!isset($_SESSION['id'])) {
