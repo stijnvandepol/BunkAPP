@@ -10,4 +10,5 @@ services:
       - ./logs:/var/www/html/logs
     ports:
       - 80:80
+      - 443:443
 
