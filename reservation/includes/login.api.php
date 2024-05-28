@@ -1,7 +1,7 @@
 <?php
 include('dbconnection.php');
 
-$base_url = 'https://' . $_SERVER['HTTP_HOST'];
+$base_url = 'http://' . $_SERVER['HTTP_HOST'];
 
 $response = array(); // Initialisatie van de response-variabele
 

@@ -1,5 +1,5 @@
 <?php
-$base_url = 'https://' . $_SERVER['HTTP_HOST'];
+$base_url = 'http://' . $_SERVER['HTTP_HOST'];
 
 session_start();
 if(!isset($_SESSION['id'])) {
@@ -81,6 +81,7 @@ if(!isset($_SESSION['id'])) {
 
             <form id="chartForm" action="includes/dashboard.api.php?action=remove" method="post">
                 <input type="hidden" name="reservation_id" id="reservationIdInput">
+                <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
             </form>
 
         </main>
@@ -91,9 +92,13 @@ if(!isset($_SESSION['id'])) {
             // Stop het standaardgedrag van het formulier
             event.preventDefault();
 
+            // Haal het gebruikers-ID op vanuit het verborgen veld
+            let userId = document.querySelector('input[name="user_id"]').value;
+
             // Maak de data die je wilt verzenden
             let data = new FormData();
             data.append('reservation_id', reservationId);
+            data.append('user_id', userId); // Voeg het gebruikers-ID toe aan de FormData
 
             // Verstuur het verzoek
             fetch('includes/dashboard.api.php?action=remove', {
@@ -115,6 +120,7 @@ if(!isset($_SESSION['id'])) {
                 console.error('Er is een fout opgetreden:', error);
             });
         }
+
 
         function refreshStatus() {
         // Maak een XMLHttpRequest-object

@@ -43,9 +43,25 @@ function removeData($conn, $reservation_id)
 {
     include("dbconnection.php");
 
-    $query = "DELETE FROM reservations WHERE reservation_id = '$reservation_id'";
-    mysqli_query($conn, $query);
+    // Haal het gebruikers-ID op uit de POST-gegevens
+    $user_id = $_POST['user_id'];
+
+    // Haal de gegevens van de te verwijderen reservering op voor logging
+    $query = "SELECT * FROM reservations WHERE reservation_id = '$reservation_id'";
+    $result = mysqli_query($conn, $query);
+    $reservationData = mysqli_fetch_assoc($result);
+
+    if ($reservationData) {
+        // Verwijder de reservering
+        $deleteQuery = "DELETE FROM reservations WHERE reservation_id = '$reservation_id'";
+        if (mysqli_query($conn, $deleteQuery)) {
+            // Log de verwijderde reservering inclusief het gebruikers-ID
+            $logMessage = "Reservation deleted: ID = " . $reservationData['reservation_id'] . ", Customers id = " . $reservationData['customers_id'] . ", Creation date = " . $reservationData['reservation_date'] . ", Date deleted = " . date("Y-m-d H:i:s") . ", User id = " . $user_id . "\n";
+            file_put_contents('/var/www/html/logs/reservation_deletions.log', $logMessage, FILE_APPEND);
+        }
+    }
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['reservation_id']) && isset($_GET['action']) && $_GET['action'] == 'remove') {

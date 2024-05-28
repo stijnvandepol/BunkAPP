@@ -3,7 +3,11 @@ services:
   php-env:
     build:
       context: .  
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./logs:/var/www/html/logs
     ports:
       - 80:80
-      - 443:443
+
