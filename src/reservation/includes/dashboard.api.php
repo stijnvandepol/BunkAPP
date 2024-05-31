@@ -37,8 +37,6 @@ function GetData()
     }
 }
 
-
-
 function removeData($conn, $reservation_id)
 {
     include("dbconnection.php");
@@ -57,9 +55,12 @@ function removeData($conn, $reservation_id)
         if (mysqli_query($conn, $deleteQuery)) {
             // Log de verwijderde reservering inclusief het gebruikers-ID
             $logMessage = "Reservation deleted: ID = " . $reservationData['reservation_id'] . ", Customers id = " . $reservationData['customers_id'] . ", Creation date = " . $reservationData['reservation_date'] . ", Date deleted = " . date("Y-m-d H:i:s") . ", User id = " . $user_id . "\n";
-            file_put_contents('/var/www/html/logs/reservation_deletions.log', $logMessage, FILE_APPEND);
 
-            fwrite(STDOUT, $logMessage);
+            // Schrijf de logboodschap naar het .txt-bestand
+            file_put_contents('/var/www/html/logs/delete.log', $logMessage, FILE_APPEND);
+
+            // Geef de logboodschap terug
+            return $logMessage;
         }
     }
 }
@@ -69,5 +70,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         removeData($conn, $_POST['reservation_id']);
     }
 }
-
 ?>

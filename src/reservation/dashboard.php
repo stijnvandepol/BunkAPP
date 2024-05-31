@@ -24,7 +24,7 @@ if(!isset($_SESSION['id'])) {
             <div class="logout-container">
                 <a href="#" onclick="refreshStatus(); return false;"><button class="logout-button">Refresh status</button></a>
                 <a href="plates_dashboard.php"><button class="logout-button">Plates</button></a>
-                <a href="logout.php"><button class="logout-button">Logout</button></a>
+                <a href="dblogout.php"><button class="logout-button">Logout</button></a>
             </div>
         </header>
         <main>

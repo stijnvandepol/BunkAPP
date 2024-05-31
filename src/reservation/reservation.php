@@ -30,12 +30,12 @@ if(!isset($_SESSION['id'])) {
 
                 <div>
                     <label for="start_date">Start Date</label>
-                    <input type="date" id="start_date" name="start_date" required><br>
+                    <input type="date" id="start_date" name="start_date" required min="<?php echo date('Y-m-d'); ?>">  <br>
                 </div>
                 
                 <div>
                     <label for="end_date">End Date</label>
-                    <input type="date" id="end_date" name="end_date" required><br>
+                    <input type="date" id="end_date" name="end_date" required min="<?php echo date('Y-m-d'); ?>">  <br>
                 </div>
 
                 <div>
@@ -105,7 +105,7 @@ if(!isset($_SESSION['id'])) {
             const result = await response.json();
             if (result.success) {
                 alert("Reservation submitted successfully!");
-                window.location.href = "succes.html";
+                window.location.href = "succes.php";
             } else {
                 alert("Failed to submit reservation: " + result.message);
             }

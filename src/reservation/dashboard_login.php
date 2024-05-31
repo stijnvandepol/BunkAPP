@@ -43,7 +43,7 @@ $api_url = $base_url . '/reservation/includes/dashboard_login.api.php';
                     }
                     ?>
                 <div class="links">
-                    <a href="https://fonteyn-vakantieparken.nl">Back to homepage</a>
+                    <a href="<?php echo $base_url; ?>">Back to homepage</a>
                 </div>
             </form>
         </div>

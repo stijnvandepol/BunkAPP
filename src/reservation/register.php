@@ -48,7 +48,7 @@ $base_url = 'https://' . $_SERVER['HTTP_HOST'];
                 <button type="submit" name="submit" class="login-btn">Register</button>
 
                 <div class="links">
-                    <a href="https://fonteyn-vakantieparken.nl">Back to homepage</a>
+                    <a href="<?php echo $base_url; ?>">Back to homepage</a>
                     <p><a href="login.php">Already have an account?</a></p>
                 </div>
             </form>

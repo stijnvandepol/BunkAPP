@@ -1,19 +1,14 @@
 <?php
 $base_url = 'https://' . $_SERVER['HTTP_HOST'];
 
-ini_set('session.cookie_path', '/reservation');
 session_start();
 
-$api_url = $base_url . '/reservation/includes/login.api.php';
+// Vernietig alle sessievariabelen
+session_unset();
 
-// $response = json_decode($api_data_json, true);
-
-if (isset($_SESSION['id'])) {
-    header("Location: " . $base_url . "/reservation/reservation.php");
-    exit();
-}
+// Vernietig de sessie
+session_destroy();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +34,7 @@ if (isset($_SESSION['id'])) {
             <br>
             <br>
 
-            <a href="https://fonteyn-vakantieparken.nl">Back to homepage</a>
+            <a href="https://webapplicatie-reserveringsysteem.azurewebsites.net">Back to homepage</a>
         </div>
 
     </main>

@@ -65,7 +65,7 @@ if (isset($_SESSION['id'])) {
                     ?>
                 </div><br>
                 <div class="links">
-                    <a href="https://fonteyn-vakantieparken.nl">Back to homepage</a>
+                    <a href="<?php echo $base_url; ?>">Back to homepage</a>
                     <a href="register.php">Do not have an account?</a>
                 </div>
 
